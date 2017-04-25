@@ -5,9 +5,45 @@ React JSPort [![react-jsport](https://badge.fury.io/js/react-jsport.svg)](https:
 npm install react-jsport
 ```
 
+You may also install ECMAScript6 Set polyfill to make it compatible.
+
+```
+npm install es6-set
+```
+
 DEMO
 ---
 [https://means88.github.io/react-jsport/](https://means88.github.io/react-jsport/)
+
+INTERFACE
+---
+```js
+JSPort.propTypes = {
+  // requirements, can be url or list of url
+  require: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.string),
+  ]),
+  // load requirements even if it has been loaded
+  force: PropTypes.bool,
+  children: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.arrayOf(PropTypes.element)
+  ]),
+  loadingElement: PropTypes.element,
+  errorElement: PropTypes.element,
+};
+
+JSPort.defaultProps = {
+  require: [],
+  force: false,
+  children: null,
+  loadingElement: null,
+  errorElement: null,
+};
+
+function load(requirements = [], force = false);
+```
 
 USAGE
 ---
@@ -59,6 +95,4 @@ class Component extends React.Component {
 
 TODO
 ---
-- requirements list
 - cache
-

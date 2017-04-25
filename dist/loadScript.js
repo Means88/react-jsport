@@ -3,7 +3,7 @@
 /*! loadJS: load a JS file asynchronously. [c]2014 @scottjehl, Filament Group, Inc. (Based on http://goo.gl/REQGQ by Paul Irish). Licensed MIT */
 /* eslint-disable */
 (function (w) {
-  var loadJS = function loadJS(src, cb) {
+  var loadJS = function loadJS(src) {
     "use strict";
 
     var ref = w.document.getElementsByTagName("script")[0];
@@ -11,10 +11,9 @@
     script.src = src;
     script.async = true;
     ref.parentNode.insertBefore(script, ref);
-    if (cb && typeof cb === "function") {
-      script.onload = cb;
-    }
-    return script;
+    return new Promise(function (resolve) {
+      script.onload = resolve;
+    });
   };
   // commonjs
   if (typeof module !== "undefined") {
