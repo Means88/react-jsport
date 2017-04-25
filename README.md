@@ -1,4 +1,4 @@
-React JSPort
+React JSPort [![react-jsport](https://badge.fury.io/js/react-jsport.svg)](https://www.npmjs.com/package/react-jsport)
 ===
 
 DEMO
@@ -56,6 +56,5 @@ class Component extends React.Component {
 TODO
 ---
 - requirements list
-- publish to npm
 - cache
 
