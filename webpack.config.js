@@ -16,9 +16,8 @@ module.exports = {
     libraryTarget: "umd",
     umdNamedDefine: true,
     filename: "bundle.js",
-    path: path.resolve(__dirname, "example")
+    path: path.resolve(__dirname, "docs")
   },
-
   devtool: "hidden-source-map",
   plugins,
   module: {

@@ -1,9 +1,7 @@
-"use strict";
-
 /*! loadJS: load a JS file asynchronously. [c]2014 @scottjehl, Filament Group, Inc. (Based on http://goo.gl/REQGQ by Paul Irish). Licensed MIT */
 /* eslint-disable */
 (function (w) {
-  var loadJS = function loadJS(src) {
+  var loadJS = function (src) {
     "use strict";
 
     var ref = w.document.getElementsByTagName("script")[0];
@@ -11,7 +9,7 @@
     script.src = src;
     script.async = true;
     ref.parentNode.insertBefore(script, ref);
-    return new Promise(function (resolve) {
+    return new Promise(resolve => {
       script.onload = resolve;
     });
   };
@@ -21,4 +19,4 @@
   } else {
     w.loadJS = loadJS;
   }
-})(typeof global !== "undefined" ? global : undefined);
+})(typeof global !== "undefined" ? global : this);

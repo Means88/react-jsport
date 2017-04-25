@@ -1,6 +1,6 @@
 {
   "name": "react-jsport",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "load external javascript in react",
   "main": "index.js",
   "scripts": {
@@ -31,7 +31,7 @@
     "babel-eslint": "^7.2.3",
     "babel-loader": "^7.0.0",
     "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-es2017": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "eslint": "^3.19.0",
