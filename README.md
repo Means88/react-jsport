@@ -1,6 +1,10 @@
 React JSPort [![react-jsport](https://badge.fury.io/js/react-jsport.svg)](https://www.npmjs.com/package/react-jsport)
 ===
 
+```
+npm install react-jsport
+```
+
 DEMO
 ---
 [https://means88.github.io/react-jsport/](https://means88.github.io/react-jsport/)
