@@ -1,6 +1,6 @@
 {
   "name": "react-jsport",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "load external javascript in react",
   "main": "index.js",
   "scripts": {
@@ -22,8 +22,8 @@
     "url": "https://github.com/Means88/react-jsport/issues"
   },
   "homepage": "https://github.com/Means88/react-jsport#readme",
-  "dependencies": {
-    "react": "^15.0.0"
+  "peerDependencies": {
+    "react": "^15"
   },
   "devDependencies": {
     "babel": "^6.23.0",
@@ -39,6 +39,7 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
+    "react": "^15.0.0",
     "react-dom": "^15.5.4",
     "webpack": "2.2.1"
   }
