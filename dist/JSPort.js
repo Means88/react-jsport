@@ -43,6 +43,9 @@ var JSPort = function (_React$Component) {
     value: function componentWillMount() {
       var _this2 = this;
 
+      if (!this.props.require) {
+        return;
+      }
       (0, _loadScript2.default)(this.props.require, function () {
         _this2.setState({ loaded: true });
       });
@@ -61,10 +64,14 @@ var JSPort = function (_React$Component) {
 }(_react2.default.Component);
 
 JSPort.propTypes = {
-  require: _react.PropTypes.string
+  require: _react.PropTypes.string,
+  children: _react.PropTypes.oneOfType([_react.PropTypes.element, _react.PropTypes.arrayOf(_react.PropTypes.element)])
 };
 
-JSPort.defaultProps = {};
+JSPort.defaultProps = {
+  require: null,
+  children: null
+};
 
 exports.default = JSPort;
 function load(requirement) {
