@@ -5,12 +5,6 @@ React JSPort [![react-jsport](https://badge.fury.io/js/react-jsport.svg)](https:
 npm install react-jsport
 ```
 
-You may also install ECMAScript6 Set polyfill to make it compatible.
-
-```
-npm install es6-set
-```
-
 DEMO
 ---
 [https://means88.github.io/react-jsport/](https://means88.github.io/react-jsport/)
