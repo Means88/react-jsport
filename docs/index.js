@@ -7,7 +7,12 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <JSPort require="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js">
+        <JSPort
+          require={[
+            "https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js",
+            "https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css",
+          ]}
+        >
           <Component1 />
         </JSPort>
         <Component2 text="world">

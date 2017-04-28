@@ -15,8 +15,7 @@
   // commonjs
   if (typeof module !== "undefined") {
     module.exports = loadJS;
-  }
-  else {
+  } else {
     w.loadJS = loadJS;
   }
 }(typeof global !== "undefined" ? global : this));

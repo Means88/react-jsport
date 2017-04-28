@@ -1,5 +1,23 @@
 import React, { PropTypes } from 'react';
 import loadScript from './loadScript';
+import loadStyle from './loadStyle';
+
+const MIME_TYPE = {
+  JavaScript: 'text/javascript',
+  CSS: 'text/css',
+};
+
+function typeofRequirement(requirement) {
+  const temps = requirement.split('.');
+  switch (temps[temps.length - 1]) {
+    case 'js':
+      return MIME_TYPE.JavaScript;
+    case 'css':
+      return MIME_TYPE.CSS;
+    default:
+      return null;
+  }
+}
 
 class JSPort extends React.Component {
 
@@ -14,26 +32,51 @@ class JSPort extends React.Component {
   }
 
   componentWillMount() {
-    let requirements;
-    if (Array.isArray(this.props.require)) {
-      requirements = this.props.require;
-    } else {
-      requirements = [this.props.require];
-    }
-    this.loadRequirements(requirements).then(() => {
+    this.loadRequirements().then(() => {
       this.setState({ loaded: true });
     }).catch(() => {
       this.setState({ error: true });
     });
   }
 
-  async loadRequirements(requirements) {
+  componentWillReceiveProps(nextProps) {
+    if (this.props.require === nextProps) {
+      return;
+    }
+    this.setState({
+      loaded: false,
+      error: false,
+    });
+    this.loadRequirements().then(() => {
+      this.setState({ loaded: true });
+    }).catch(() => {
+      this.setState({ error: true });
+    });
+  }
+
+  async loadRequirements() {
+    let requirements;
+    if (Array.isArray(this.props.require)) {
+      requirements = this.props.require;
+    } else {
+      requirements = [this.props.require];
+    }
+
     for (const requirement of requirements) {
       if (!this.props.force && JSPort.requirementSet.has(requirement)) {
         continue;
       }
+      switch (typeofRequirement(requirement)) {
+        case MIME_TYPE.JavaScript:
+          await loadScript(requirement);
+          break;
+        case MIME_TYPE.CSS:
+          await loadStyle(requirement);
+          break;
+        default:
+          break;
+      }
       JSPort.requirementSet.add(requirement);
-      await loadScript(requirement);
     }
   }
 

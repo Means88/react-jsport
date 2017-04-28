@@ -54,12 +54,14 @@ class Component extends React.Component {
   }
 
   changeText() {
-    $('#hello1').text('Changed by jQuery1');
+    $('#hello').text('Changed by jQuery');
   }
 
   render() {
     return (
-      <div id="hello1">Hello world1</div>
+      <a id="hello" className="btn btn-default">
+        Hello world
+      </a>
     );
   }
 }
@@ -67,7 +69,12 @@ class Component extends React.Component {
 // import jQuery dynamically
 import JSPort from 'react-jsport';
 
-<JSPort require="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js">
+<JSPort
+  require={[
+    "https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js",
+    "https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css",
+  ]}
+>
   <Component />
 </JSPort>
 ```

@@ -50,7 +50,28 @@ var _loadScript = require('./loadScript');
 
 var _loadScript2 = _interopRequireDefault(_loadScript);
 
+var _loadStyle = require('./loadStyle');
+
+var _loadStyle2 = _interopRequireDefault(_loadStyle);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var MIME_TYPE = {
+  JavaScript: 'text/javascript',
+  CSS: 'text/css'
+};
+
+function typeofRequirement(requirement) {
+  var temps = requirement.split('.');
+  switch (temps[temps.length - 1]) {
+    case 'js':
+      return MIME_TYPE.JavaScript;
+    case 'css':
+      return MIME_TYPE.CSS;
+    default:
+      return null;
+  }
+}
 
 var JSPort = function (_React$Component) {
   (0, _inherits3.default)(JSPort, _React$Component);
@@ -72,102 +93,142 @@ var JSPort = function (_React$Component) {
     value: function componentWillMount() {
       var _this2 = this;
 
-      var requirements = void 0;
-      if (Array.isArray(this.props.require)) {
-        requirements = this.props.require;
-      } else {
-        requirements = [this.props.require];
-      }
-      this.loadRequirements(requirements).then(function () {
+      this.loadRequirements().then(function () {
         _this2.setState({ loaded: true });
       }).catch(function () {
         _this2.setState({ error: true });
       });
     }
   }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      var _this3 = this;
+
+      if (this.props.require === nextProps) {
+        return;
+      }
+      this.setState({
+        loaded: false,
+        error: false
+      });
+      this.loadRequirements().then(function () {
+        _this3.setState({ loaded: true });
+      }).catch(function () {
+        _this3.setState({ error: true });
+      });
+    }
+  }, {
     key: 'loadRequirements',
     value: function () {
-      var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(requirements) {
-        var _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, requirement;
+      var _ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee() {
+        var requirements, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, requirement;
 
         return _regenerator2.default.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                requirements = void 0;
+
+                if (Array.isArray(this.props.require)) {
+                  requirements = this.props.require;
+                } else {
+                  requirements = [this.props.require];
+                }
+
                 _iteratorNormalCompletion = true;
                 _didIteratorError = false;
                 _iteratorError = undefined;
-                _context.prev = 3;
+                _context.prev = 5;
                 _iterator = (0, _getIterator3.default)(requirements);
 
-              case 5:
+              case 7:
                 if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
-                  _context.next = 15;
+                  _context.next = 25;
                   break;
                 }
 
                 requirement = _step.value;
 
                 if (!(!this.props.force && JSPort.requirementSet.has(requirement))) {
-                  _context.next = 9;
+                  _context.next = 11;
                   break;
                 }
 
-                return _context.abrupt('continue', 12);
+                return _context.abrupt('continue', 22);
 
-              case 9:
-                JSPort.requirementSet.add(requirement);
-                _context.next = 12;
+              case 11:
+                _context.t0 = typeofRequirement(requirement);
+                _context.next = _context.t0 === MIME_TYPE.JavaScript ? 14 : _context.t0 === MIME_TYPE.CSS ? 17 : 20;
+                break;
+
+              case 14:
+                _context.next = 16;
                 return (0, _loadScript2.default)(requirement);
 
-              case 12:
-                _iteratorNormalCompletion = true;
-                _context.next = 5;
-                break;
-
-              case 15:
-                _context.next = 21;
-                break;
+              case 16:
+                return _context.abrupt('break', 21);
 
               case 17:
-                _context.prev = 17;
-                _context.t0 = _context['catch'](3);
-                _didIteratorError = true;
-                _iteratorError = _context.t0;
+                _context.next = 19;
+                return (0, _loadStyle2.default)(requirement);
+
+              case 19:
+                return _context.abrupt('break', 21);
+
+              case 20:
+                return _context.abrupt('break', 21);
 
               case 21:
-                _context.prev = 21;
-                _context.prev = 22;
+                JSPort.requirementSet.add(requirement);
+
+              case 22:
+                _iteratorNormalCompletion = true;
+                _context.next = 7;
+                break;
+
+              case 25:
+                _context.next = 31;
+                break;
+
+              case 27:
+                _context.prev = 27;
+                _context.t1 = _context['catch'](5);
+                _didIteratorError = true;
+                _iteratorError = _context.t1;
+
+              case 31:
+                _context.prev = 31;
+                _context.prev = 32;
 
                 if (!_iteratorNormalCompletion && _iterator.return) {
                   _iterator.return();
                 }
 
-              case 24:
-                _context.prev = 24;
+              case 34:
+                _context.prev = 34;
 
                 if (!_didIteratorError) {
-                  _context.next = 27;
+                  _context.next = 37;
                   break;
                 }
 
                 throw _iteratorError;
 
-              case 27:
-                return _context.finish(24);
+              case 37:
+                return _context.finish(34);
 
-              case 28:
-                return _context.finish(21);
+              case 38:
+                return _context.finish(31);
 
-              case 29:
+              case 39:
               case 'end':
                 return _context.stop();
             }
           }
-        }, _callee, this, [[3, 17, 21, 29], [22,, 24, 28]]);
+        }, _callee, this, [[5, 27, 31, 39], [32,, 34, 38]]);
       }));
 
-      function loadRequirements(_x) {
+      function loadRequirements() {
         return _ref.apply(this, arguments);
       }
 

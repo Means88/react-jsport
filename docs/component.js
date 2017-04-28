@@ -12,12 +12,14 @@ export class Component1 extends React.Component {
   }
 
   changeText() {
-    $('#hello1').text('Changed by jQuery1');
+    $('#hello').text('Changed by jQuery');
   }
 
   render() {
     return (
-      <div id="hello1">Hello world1</div>
+      <button id="hello" className="btn btn-default">
+        Bootstrap Button
+      </button>
     );
   }
 }
