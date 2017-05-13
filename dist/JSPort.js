@@ -8,6 +8,10 @@ var _set = require('babel-runtime/core-js/set');
 
 var _set2 = _interopRequireDefault(_set);
 
+var _extends2 = require('babel-runtime/helpers/extends');
+
+var _extends3 = _interopRequireDefault(_extends2);
+
 var _regenerator = require('babel-runtime/regenerator');
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
@@ -269,12 +273,12 @@ JSPort.defaultProps = {
 };
 
 exports.default = JSPort;
-function load(requirement, force) {
+function load(requirement, options) {
   return function (component) {
     var wrapper = function wrapper(props) {
       return _react2.default.createElement(
         JSPort,
-        { require: requirement, force: force },
+        (0, _extends3.default)({ require: requirement }, options),
         _react2.default.createElement(component, props)
       );
     };

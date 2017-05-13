@@ -115,11 +115,11 @@ JSPort.defaultProps = {
 
 export default JSPort;
 
-export function load(requirement, force) {
+export function load(requirement, options) {
   return function (component) {
     const wrapper = function (props) {
       return (
-        <JSPort require={requirement} force={force}>
+        <JSPort require={requirement} {...options}>
           {React.createElement(component, props)}
         </JSPort>
       );

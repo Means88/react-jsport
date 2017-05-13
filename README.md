@@ -12,6 +12,17 @@ DEMO
 INTERFACE
 ---
 ```js
+function load(requirements = [], options = {});
+/**
+ * @param requirements: array of url[dfault=[]]
+ * @param options object[default={}]: {
+ *   force: boolean[default=false], requirements with the same url will not be loaded twice by default
+ *   loadingElement: ReactElement[default=null], be rendered while loading
+ *   errorElement: ReactElement[default=null], be rendered when an error caused
+ * }
+ * @return ReactComponent
+ */
+
 JSPort.propTypes = {
   // requirements, can be url or list of url
   require: PropTypes.oneOfType([
@@ -36,11 +47,34 @@ JSPort.defaultProps = {
   errorElement: null,
 };
 
-function load(requirements = [], force = false);
+
+load(requirements, options)(Component);
+// ==>
+<JSPort
+  requirements={requirements}
+  {...options}
+>
+  <Component />
+</JSPort>
 ```
 
 USAGE
 ---
+
+```js
+import { load } from 'react-jsport';
+
+Component = load("https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js")(Component);
+
+// or
+
+@load("https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js")
+class Component extends React.Component {
+  // ...
+}
+```
+
+Or wrapped in `JSPort`
 
 ```js
 class Component extends React.Component {
@@ -79,20 +113,6 @@ import JSPort from 'react-jsport';
 </JSPort>
 ```
 
-Or decorate the Component
-
-```js
-import { load } from 'react-jsport';
-
-Component = load("https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js")(Component);
-
-// or
-
-@load("https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js")
-class Component extends React.Component {
-  // ...
-}
-```
 
 TODO
 ---
