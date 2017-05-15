@@ -40,7 +40,7 @@ class JSPort extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.require === nextProps) {
+    if (this.props.require === nextProps.require) {
       return;
     }
     this.setState({

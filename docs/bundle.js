@@ -7692,7 +7692,7 @@ var JSPort = function (_React$Component) {
     value: function componentWillReceiveProps(nextProps) {
       var _this3 = this;
 
-      if (this.props.require === nextProps) {
+      if (this.props.require === nextProps.require) {
         return;
       }
       this.setState({

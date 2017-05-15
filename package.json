@@ -1,6 +1,6 @@
 {
   "name": "react-jsport",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "load external javascript in react",
   "main": "index.js",
   "scripts": {
